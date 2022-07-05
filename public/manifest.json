@@ -1,0 +1,11 @@
+{
+    "name": "placigo",
+    "short_name": "placigo",
+    "icons": [
+    ],
+    "theme_color": "#FFFFFF",
+    "background_color": "#FFFFFF",
+    "start_url": "/",
+    "display": "standalone",
+    "orientation": "portrait"
+  }

@@ -1,0 +1,64 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+
+    *{
+        @apply tracking-wide font-roboto;
+    }
+
+    h1{
+        @apply text-7xl font-bold;
+    }
+    h2{
+        @apply text-6xl font-bold;
+    }
+    h3{
+        @apply text-5xl font-bold;
+    }
+    h4{
+        @apply text-3xl font-bold;
+    }
+    h5{
+        @apply text-2xl font-bold;
+    }
+    h6{
+        @apply text-lg font-bold;
+    }
+    p{
+        @apply text-sm
+    }
+}
+
+@layer components {
+
+    .page-top{
+        @apply flex flex-col space-y-6 py-4 bg-zinc-900 rounded-t-3xl min-h-screen mt-20 pb-20;
+    }
+
+    .gradient-text{
+        @apply text-transparent bg-clip-text;
+    }
+
+    /* button  */
+    .btn-1 {
+        @apply bg-indigo-600 h-11 w-80 text-center text-white rounded-xl font-semibold text-lg;
+    }
+
+    /* input  */
+    .sbmt {
+        @apply bg-indigo-600 w-80 h-11 text-lg text-white font-semibold rounded-xl;
+    }
+}
+
+
+
+*{
+    -webkit-tap-highlight-color: transparent;
+}
+/* Removing the default arrow */
+select {
+    -webkit-appearance: none;
+    appearance: none;
+}
