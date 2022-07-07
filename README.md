@@ -21,3 +21,22 @@ pnpm create next-app --example with-tailwindcss with-tailwindcss-app
 ```
 
 Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+
+Students Feed: 
+ 1. Popular Companies
+ 2. Suggested jobs
+ 3. Training Reminder
+ 4. College Notification
+ 5. Other students 
+
+Recruiter Feed:
+  1. Colleges
+  2. Placement successful students for other companies
+  3. Current job postings
+
+College Feed:
+  1. Students
+  2. Companies
+  3. Pending verifications
+  4. Placed students
+  5. Training and internship posts, job offers
