@@ -5,8 +5,9 @@
       "@/components/*": ["components/*"],
       "@/modules/*": ["modules/*"],
       "@/public/*": ["public/*"],
-      "@/constants/*": ["utils/constants/*"],
-      "@/helpers/*": ["utils/helpers/*"]
+      "@/constants/*": ["constants/*"],
+      "@/services/*": ["/services/*"],
+      "@/store/*": ["/store/*"]
     }
   }
 }

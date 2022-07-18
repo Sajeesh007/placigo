@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
 import { registration } from "@/constants/form.const";
+import { signUp } from "services/auth.service";
 
 import Registration from "@/components/Auth/Registration";
 import { MdOutlineArrowBack } from "react-icons/md";
@@ -14,8 +15,20 @@ export default function Register() {
 
     const { register, handleSubmit, formState: { errors } } = useForm()
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const [success, setsuccess] = useState(false)
+    const [error, seterror] = useState(false)
+    const [loading, setloading] = useState(false)
+
+    const onSubmit = async (data) => {
+        await signUp({
+            email: data.email,
+            password: data.password,
+            data: data,
+            role: router.query.user,
+            setsuccess: setsuccess,
+            seterror: seterror,
+            setloading: setloading
+        })
     }
 
     return (
@@ -36,7 +49,7 @@ export default function Register() {
                         router.query.user == 'company' ? registration.company : router.query.user == 'college' ? registration.college : null} 
                         register={register} errors={errors}/>
                     <button className='sbmt w-76' type='submit'>
-                        Register
+                        {loading ? 'Saving...' : 'Register'}
                     </button>
                 </form>
             </div>

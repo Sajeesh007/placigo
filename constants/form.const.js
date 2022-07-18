@@ -1,16 +1,23 @@
 
     const colleges = ['GECW', 'GECK', 'CET', 'GECT']
+    const gender = ['Male', 'Female', 'Other']
     const university = ['KTU']
     const collegeType = ['Government', 'Government Controlled', 'Self Financing']
     const spec = ['CS', 'AI', 'Electronics']
 
 export const registration = {
     student: [
-        {field: 'text', type: 'text', htmlFor: 'student_name', label: 'Full Name'},
-        {field: 'text', type: 'tel', htmlFor: 'phone', label: 'Phone Number'},
+        {field: 'text', type: 'text', htmlFor: 'full_name', label: 'Full Name'},
+        {field: 'text', type: 'number', htmlFor: 'age', label: 'Age'},
+        {field: 'select', name: 'gender', values: gender, label: 'Gender'},
+        {field: 'text', type: 'tel', htmlFor: 'mobile_no', label: 'Phone Number'},
         {field: 'select', name: 'college', values: colleges, label: 'College'},
         {field: 'text', type: 'text', htmlFor: 'course', label: 'Course'},
         {field: 'select', name: 'specialization', values: spec, label: 'Specialization'},
+        {field: 'text_area', type: 'text', htmlFor: 'address', label: 'Address'},
+        {field: 'text', type: 'text', htmlFor: 'city', label: 'City'},
+        {field: 'text', type: 'text', htmlFor: 'district', label: 'District'},
+        {field: 'text', type: 'number', htmlFor: 'pincode', label: 'Pincode'},
         {field: 'text', type: 'email', htmlFor: 'email', label: 'Email'},
         {field: 'text', type: 'password', htmlFor: 'password', label: 'Password'},
     ],
