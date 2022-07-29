@@ -3,7 +3,7 @@ import Link from "next/link";
 import Title from "@/components/Auth/Title"
 
 
-export default function signup() {
+export default function RegisterPage() {
   return (
     <div className='flex flex-col justify-between bg-gradient-to-bl from-cyan-600 via-indigo-900 to-rose-900 
         h-screen w-screen pt-12'>

@@ -6,7 +6,7 @@ export default function Select({label, name, register, values, error}){
     <div className="flex items-center space-x-2 relative">
         <select {...register(name, { required: 'This field is required' })}
             className='bg-transparent outline-none border border-white
-            rounded-xl px-3 w-76 h-11 focus:border-blue-600'>
+            rounded-xl px-3 w-76 h-11 focus:border-blue-600 text-white'>
 
             <option value='' selected hidden disabled>{label}</option>
             {values?.map((item)=> 

@@ -22,6 +22,7 @@ export default function InputText({label, htmlFor, type, error, register}) {
     return(
         <div className="flex flex-col space-y-4  text-white">
 
+
             <div className="flex relative justify-center items-center">
                 <input type={inputType} placeholder={label} {...register(htmlFor, { required: 'This field is required' })}
                     className={` bg-transparent border border-white  outline-none focus:border-blue-600

@@ -34,7 +34,7 @@
 @layer components {
 
     .page-top{
-        @apply flex flex-col space-y-6 py-4 bg-zinc-900 rounded-t-3xl min-h-screen mt-20 pb-20;
+        @apply flex flex-col space-y-6 pb-20 p-3;
     }
 
     .gradient-text{
@@ -45,20 +45,59 @@
     .btn-1 {
         @apply bg-indigo-600 h-11 w-80 text-center text-white rounded-xl font-semibold text-lg;
     }
+    .btn-2 {
+        @apply bg-zinc-900 h-14 w-80 text-center text-white rounded-xl font-semibold text-lg;
+    }
+    .btn-primary{
+        @apply bg-indigo-600 shadow-md shadow-indigo-800
+         text-white rounded-xl font-semibold;
+    }
+    .grdnt-btn-cancel{
+        @apply bg-gradient-to-tr from-rose-800 via-rose-600 to-rose-400 shadow-md shadow-rose-800
+         text-white rounded-xl font-semibold;
+    }
 
     /* input  */
     .sbmt {
         @apply bg-indigo-600 w-80 h-11 text-lg text-white font-semibold rounded-xl;
     }
+
+    /* gradient */
+    .grdnt-indigo {
+        @apply bg-gradient-to-tr from-indigo-800 via-indigo-600 to-indigo-400 shadow-md shadow-indigo-800;   
+    }
+    .grdnt-teal {
+        @apply bg-gradient-to-tr from-teal-800 via-teal-600 to-teal-400 shadow-md shadow-teal-700;   
+    }
+    .grdnt-orange {
+        @apply bg-gradient-to-tr from-orange-800 via-orange-600 to-orange-400 shadow-md shadow-orange-700;   
+    }
+    .grdnt-rose {
+        @apply bg-gradient-to-tr from-rose-800 via-rose-600 to-rose-400 shadow-md shadow-rose-800;   
+    }
+}
+
+@layer utilities {
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .no-scrollbar {
+      -ms-overflow-style: none; /* IE and Edge */
+      scrollbar-width: none; /* Firefox */
+    
+    }
+
+    /* remving tap highlight */
+    *{
+        -webkit-tap-highlight-color: transparent;
+    }
+    /* Removing the default arrow */
+    select {
+        -webkit-appearance: none;
+        appearance: none;
+    }
 }
 
 
-
-*{
-    -webkit-tap-highlight-color: transparent;
-}
-/* Removing the default arrow */
-select {
-    -webkit-appearance: none;
-    appearance: none;
-}

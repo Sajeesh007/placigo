@@ -1,12 +1,17 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
 
-import { registration } from "@/constants/form.const";
 import { signUp } from "services/auth.service";
+import { getCollegeDropDownData } from "libs/form.helper";
 
-import Registration from "@/components/Auth/Registration";
 import { MdOutlineArrowBack } from "react-icons/md";
+
+import StudentRegistration from "@/components/Auth/StudentRegistration";
+import CompanyRegistration from "@/components/Auth/CompanyRegistration";
+import CollegRegistration from "@/components/Auth/CollegeRegistration";
+import Portal from "@/modules/Layout/Portal";
+import Confirmation from "@/components/Auth/Confirmation";
 
 
 export default function Register() {
@@ -18,8 +23,13 @@ export default function Register() {
     const [success, setsuccess] = useState(false)
     const [error, seterror] = useState(false)
     const [loading, setloading] = useState(false)
+    const [collegeData, setcollegeData] = useState(null)
 
     const onSubmit = async (data) => {
+        if(router.query.user == 'student'){
+            const collegeId = collegeData.filter((item)=> item.name == data.college)
+            data.college = collegeId[0].id
+        }
         await signUp({
             email: data.email,
             password: data.password,
@@ -31,9 +41,24 @@ export default function Register() {
         })
     }
 
+
+    useEffect(() => {
+        const getDropDown = async () => {
+            const {data, error} = await getCollegeDropDownData()
+            !error && setcollegeData(data)
+        }
+        (router.isReady && router.query.user == 'student') && getDropDown()
+    }, [router.isReady])
+    
+
+    const redirect = () => {
+        router.replace(`/${router.query.user}`)
+    }
+
     return (
-        <div className="flex flex-col justify-center items-center space-y-4 py-12
-            bg-gradient-to-bl from-cyan-600 via-indigo-900 to-rose-900 min-h-screen">
+        <div className={`flex flex-col justify-center items-center space-y-4 py-12 relative
+            bg-gradient-to-bl from-cyan-600 via-indigo-900 to-rose-900 min-h-screen text-white
+            ${ (success || error) && 'blur-sm '}`}>
  
             <h4>placigo</h4>
             
@@ -45,14 +70,33 @@ export default function Register() {
                     <h5> Registration </h5>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col space-y-4'>
-                    <Registration values={router.query.user == 'student' ? registration.student : 
-                        router.query.user == 'company' ? registration.company : router.query.user == 'college' ? registration.college : null} 
-                        register={register} errors={errors}/>
+                    {
+                        router.query.user == 'student' ? 
+                            <StudentRegistration collegeData={collegeData?.map((item)=>item.name)} register={register} errors={errors}/> :
+                        router.query.user == 'company' ? 
+                            <CompanyRegistration register={register} errors={errors}/> :
+                        router.query.user == 'college' ? 
+                            <CollegRegistration register={register} errors={errors}/> :
+                        null      
+                    }
                     <button className='sbmt w-76' type='submit'>
                         {loading ? 'Saving...' : 'Register'}
                     </button>
                 </form>
             </div>
+
+            { success && 
+                <Portal>
+                    <Confirmation type='success' message='You have registerd successfully' 
+                    redirect={redirect}/>
+                </Portal> 
+            }
+            { error && 
+                <Portal>
+                    <Confirmation type='error' message='Oops! something went wrong' 
+                    redirect={redirect}/>
+                </Portal> 
+            }
         </div>
     )
 }

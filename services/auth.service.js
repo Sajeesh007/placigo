@@ -1,5 +1,5 @@
-import { supabase } from "../../supabse";
-import { createStudent } from "./profile.service";
+import { supabase } from "supabse";
+import { createCollege, createStudent } from "./profile.service";
 
 // ------------------------------------------------------ auth ----------------------------------------------------
 export async function signUp({email, password, data, setsuccess, seterror, setloading, role}){
@@ -19,20 +19,24 @@ export async function signUp({email, password, data, setsuccess, seterror, setlo
     } else {
         if(role == 'student'){
             createStudent({id: user.id, data: user.user_metadata, seterror: seterror, setsuccess: setsuccess})
+        } else if(role == 'college'){
+            createCollege({id: user.id, data: user.user_metadata, seterror: seterror, setsuccess: setsuccess })
         }
     }
     setloading(false)
 }
 
-export async function signIn({email, password}){
+export async function signIn({email, password, setsuccess, seterror, setloading, router}){
+    setloading(true)
     const { user, session, error } = await supabase.auth.signIn({
         email: email,
         password: password,
     })
-
-    return {
-        user: user, 
-        session: session, 
-        error: error?.message
+    if(error)
+        seterror(true)
+    else{
+        setsuccess(true)
+        router.push(`/${user.user_metadata.role}`)
     }
+    setloading(false)
 }

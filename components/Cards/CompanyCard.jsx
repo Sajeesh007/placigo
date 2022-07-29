@@ -3,7 +3,7 @@ import { MdWork } from 'react-icons/md'
 
 export default function CompanyCard() {
   return (
-    <div className='flex flex-col justify-between bg-indigo-700 mx-4 h-40 w-54 rounded-3xl px-3 py-3'>
+    <div className='flex flex-col justify-between grdnt-indigo mx-4 h-40 w-54 rounded-3xl px-3 py-3'>
 
         <div className='flex space-x-2 items-center'>
             <div className='flex justify-center items-center bg-white p-3 rounded-3xl'>

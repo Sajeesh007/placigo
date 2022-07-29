@@ -1,9 +1,10 @@
 
     const colleges = ['GECW', 'GECK', 'CET', 'GECT']
-    const gender = ['Male', 'Female', 'Other']
+ export const gender = ['Male', 'Female', 'Other']
     const university = ['KTU']
     const collegeType = ['Government', 'Government Controlled', 'Self Financing']
-    const spec = ['CS', 'AI', 'Electronics']
+export const spec = ['CSE', 'ME', 'ECE', 'EEE']
+export const course = ['B.Tech', 'M.Tech', 'MCA', 'BE', 'B.Arch']
 
 export const registration = {
     student: [

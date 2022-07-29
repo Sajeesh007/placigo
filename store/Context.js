@@ -25,8 +25,8 @@ export default function Context({children}) {
       const authListner = supabase.auth.onAuthStateChange((event, session) => {
         if(event === 'SIGNED_IN'){
           setAuthenticated(true)
-          setuser(s?.currentSession?.user)
-          setsession(s?.currentSession)
+          setuser(session?.user)
+          setsession(session)
         }
         else if(event === 'SIGNED_OUT') 
           setAuthenticated(false)
@@ -39,6 +39,7 @@ export default function Context({children}) {
         const s = reactLocalStorage.getObject('supabase.auth.token')
         user == null && setuser(s?.currentSession?.user)
         session == null && setsession(s?.currentSession)
+        console.log('running context');
     }, [])
     
 

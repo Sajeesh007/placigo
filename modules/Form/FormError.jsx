@@ -1,5 +1,4 @@
 import { useState } from 'react'
-
 import { BiError } from 'react-icons/bi'
 
 export default function FormError({error}) {
