@@ -9,8 +9,6 @@ import Header from "@/components/Navigation/Header"
 
 export default function CollegeLayout({children, notShowHeader, notShowFooter}) {
 
-  const { user } = useAuthContext()
-
   const router = useRouter()
 
   useEffect(() => {

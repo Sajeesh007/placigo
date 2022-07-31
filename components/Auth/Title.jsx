@@ -7,7 +7,7 @@ export default function Title() {
         <div className='flex flex-col space-y-4 px-6'>
             {/* Placing with logo */}
             <div >
-                <h4>placigo</h4>
+                <h4 className="text-white">placigo</h4>
             </div>
             {/* motto */}
             <div className='flex flex-col'>

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/router"
 
-import { useAuthContext } from "store/Context";
+import { supabase } from "supabse";
 
 import Footer from "@/components/Navigation/Footer";
 import Header from "@/components/Navigation/Header"
@@ -9,13 +9,13 @@ import Header from "@/components/Navigation/Header"
 
 export default function StudentLayout({children, notShowHeader, notShowFooter}) {
 
-  const { user } = useAuthContext()
 
   const router = useRouter()
 
   useEffect(() => {
-    user?.user_metadata?.role !== 'student' && router.push('/login')
-  }, [user])
+    const user = supabase.auth.user()
+    !user && user?.user_metadata?.role !== 'student' && router.push('/login')
+  }, [])
 
   return (
     <div className='flex flex-col bg-zinc-900 text-white relative min-h-screen'>

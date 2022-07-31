@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function StudentProfilePage() {
+export default function Companies() {
   return (
     <div>sss</div>
   )
