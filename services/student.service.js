@@ -1,5 +1,13 @@
 import { supabase } from "supabse";
 
+export const getStudentsByCollege = async ({id, setstudentsData, setloading, seterror}) => {
+    setloading(true)
+    const students = await supabase.from('student').select().match({college: id})
+    if(students?.error) seterror(true)
+    else setstudentsData(students.data)
+    setloading(false)
+}
+
 // -------------------------------------------------- Spaces --------------------------------------------------------------------------
 export const addStudentPost = async ({id, content, setsuccess, setloading, seterror, router}) => {
     setloading(true)

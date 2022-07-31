@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
-import PostAdd from "@/components/Navigation/PostAdd"
-import StudentPost from "@/components/Posts/StudentPosts"
-import StudentLayout from "@/modules/Layout/StudentLayout"
+
 import { getStudentPosts } from "services/student.service"
+
+import PostAdd from "@/components/Posts/PostAdd"
+import StudentLayout from "@/modules/Layout/StudentLayout"
+import Spaces from "@/components/Posts/Spaces"
 
 export default function StudentSpacePage() {
 
@@ -25,7 +27,7 @@ export default function StudentSpacePage() {
       <div className="flex flex-col divide-y divide-zinc-700">
         { 
           studentPosts?.map((post)=> 
-            <StudentPost key={post.id} name={post.student.name} content={post.content} time={post.created_at}/>
+            <Spaces key={post.id} name={post.student.name} content={post.content} time={post.created_at}/>
           )         
         }
 

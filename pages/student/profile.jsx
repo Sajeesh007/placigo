@@ -68,11 +68,11 @@ export default function Profile() {
                             Edit
                         </button> :
                         <div className='flex space-x-2'>
-                            <button className='grdnt-btn-primary px-6 h-10'
+                            <button className='btn-primary px-6 h-10'
                                 type='submit'>
                                 {loading ? 'Saving...' :'Save'}
                             </button>
-                            <button className='grdnt-btn-cancel px-6 h-10'
+                            <button className='btn-cancel px-6 h-10'
                                 onClick={()=>seteditClicked(false)}>
                                 Cancel
                             </button>

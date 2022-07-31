@@ -1,4 +1,4 @@
-import CompanyCard from "@/components/Cards/CompanyCard"
+import CompanyCard from "@/components/Cards/Company/CompanyCard"
 import MainCard from "@/components/Cards/MainCard"
 import StudentLayout from "@/modules/Layout/StudentLayout"
 

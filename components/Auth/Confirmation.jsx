@@ -1,3 +1,4 @@
+import { AiOutlineClose } from 'react-icons/ai'
 import { TiTickOutline } from 'react-icons/ti'
 
 export default function Confirmation({type, message, redirect}) {
@@ -10,7 +11,10 @@ export default function Confirmation({type, message, redirect}) {
             <h5 className='text-center'>{message}</h5>
             <div className='flex justify-center items-center bg-zinc-900 rounded-full 
                 w-28 h-28'>
-                <TiTickOutline className='text-white w-16 h-16'/>
+                { type == 'success' ?
+                  <TiTickOutline className='text-white w-16 h-16'/> :
+                  <AiOutlineClose className='text-white w-16 h-16'/>
+                }
             </div>
             <button className='btn-2' onClick={redirect}>
                 {type == 'success' ? "Continue" : 'Try again'}

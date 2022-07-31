@@ -12,6 +12,7 @@ export default function CollegRegistration({ register, errors }) {
           <Select name='university' label='University' values={['KTU']} register={register}  error={errors['university']}/>
           <TextArea htmlFor='courses' label='Courses, use comma to seperate' register={register} error={errors['courses']}/>
           <TextArea htmlFor='specializations' label='Specialization, use comma to seperate' register={register} error={errors['specializations']}/>
+          <TextArea htmlFor='about' label='About' register={register} error={errors['about']}/>
       </div>
         <div className='flex flex-col space-y-4 items-center'>
           <InputText type='text' htmlFor='street' label='Street' register={register} error={errors['street']}/>

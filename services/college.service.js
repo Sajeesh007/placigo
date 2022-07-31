@@ -18,3 +18,18 @@ export const getCollegeDetails = async ({columns, selectAll}) => {
     }
     
 }
+
+export const getColleges = async ({setcollegesData, setloading, seterror}) => {
+    setloading(true)
+    const colleges = await supabase.from('college').select()
+    if(colleges?.error) seterror(true)
+    else setcollegesData(colleges.data)
+    setloading(false)
+}
+export const getCollegeById = async ({id, setcollegeData, setloading, seterror}) => {
+    setloading(true)
+    const college = await supabase.from('college').select().match({id: id})
+    if(college?.error) seterror(true)
+    else setcollegeData(college.data[0])
+    setloading(false)
+}

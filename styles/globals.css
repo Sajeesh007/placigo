@@ -34,7 +34,7 @@
 @layer components {
 
     .page-top{
-        @apply flex flex-col space-y-6 pb-20 p-3;
+        @apply flex flex-col space-y-6 pb-20 p-4;
     }
 
     .gradient-text{
@@ -52,8 +52,8 @@
         @apply bg-indigo-600 shadow-md shadow-indigo-800
          text-white rounded-xl font-semibold;
     }
-    .grdnt-btn-cancel{
-        @apply bg-gradient-to-tr from-rose-800 via-rose-600 to-rose-400 shadow-md shadow-rose-800
+    .btn-cancel{
+        @apply bg-rose-600 shadow-md shadow-rose-800
          text-white rounded-xl font-semibold;
     }
 

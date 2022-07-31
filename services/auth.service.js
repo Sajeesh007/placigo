@@ -1,5 +1,5 @@
 import { supabase } from "supabse";
-import { createCollege, createStudent } from "./profile.service";
+import { createCollege, createCompany, createStudent } from "./profile.service";
 
 // ------------------------------------------------------ auth ----------------------------------------------------
 export async function signUp({email, password, data, setsuccess, seterror, setloading, role}){
@@ -21,7 +21,9 @@ export async function signUp({email, password, data, setsuccess, seterror, setlo
             createStudent({id: user.id, data: user.user_metadata, seterror: seterror, setsuccess: setsuccess})
         } else if(role == 'college'){
             createCollege({id: user.id, data: user.user_metadata, seterror: seterror, setsuccess: setsuccess })
-        }
+        } else if(role == 'company'){
+            createCompany({id: user.id, data: user.user_metadata, seterror: seterror, setsuccess: setsuccess })
+        } 
     }
     setloading(false)
 }

@@ -50,11 +50,7 @@ export default function Register() {
         (router.isReady && router.query.user == 'student') && getDropDown()
     }, [router.isReady])
     
-
-    const redirect = () => {
-        router.replace(`/${router.query.user}`)
-    }
-
+    
     return (
         <div className={`flex flex-col justify-center items-center space-y-4 py-12 relative
             bg-gradient-to-bl from-cyan-600 via-indigo-900 to-rose-900 min-h-screen text-white
@@ -88,13 +84,13 @@ export default function Register() {
             { success && 
                 <Portal>
                     <Confirmation type='success' message='You have registerd successfully' 
-                    redirect={redirect}/>
+                    redirect={()=>router.replace(`/${router.query.user}`)}/>
                 </Portal> 
             }
             { error && 
                 <Portal>
                     <Confirmation type='error' message='Oops! something went wrong' 
-                    redirect={redirect}/>
+                    redirect={()=>router.replace(`/register`)}/>
                 </Portal> 
             }
         </div>

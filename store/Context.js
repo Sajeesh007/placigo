@@ -9,6 +9,11 @@ export function useAuthContext() {
     return useContext(AuthContext)
 }
 
+const CompanyContext = createContext()
+export function useCompanyContext() {
+    return useContext(CompanyContext)
+}
+
 const ChatContext = createContext()
 export function useChatContext() {
     return useContext(ChatContext)
@@ -40,8 +45,10 @@ export default function Context({children}) {
         user == null && setuser(s?.currentSession?.user)
         session == null && setsession(s?.currentSession)
         console.log('running context');
-    }, [])
-    
+    }, [])    
+
+    // company context
+    const [globalJobData, setglobalJobData] = useState(null)
 
     //chat context
 
@@ -55,7 +62,11 @@ export default function Context({children}) {
             <ChatContext.Provider value={{
                 
             }}>
-              {children}
+                <CompanyContext.Provider value={{
+                  globalJobData, setglobalJobData
+                }}>
+                  {children}
+                </CompanyContext.Provider>
             </ChatContext.Provider>
         </AuthContext.Provider>
     )

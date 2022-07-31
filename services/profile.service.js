@@ -67,14 +67,15 @@ export const updateStudentProfile = async ({id, data, setsuccess, seterror, setl
     setloading(false)
 }
 
+// -------------------------------------------------------------- College -----------------------------------------------------------------
 export const createCollege = async ({id, data, seterror, setsuccess}) => {
-
     const college = await supabase.from('college').insert([{
         id: id,
         name: data.name,
         university: data.university,
         courses: data.courses.replace(/\s+/g, '').replace(/\n+/g,'').split(','),
         specializations: data.specializations.replace(/\s+/g, '').replace(/\n+/g,'').split(','),
+        about: data.about,
         mobile: data.mobile,
         email: data.email,
         website: data.website,
@@ -91,3 +92,30 @@ export const createCollege = async ({id, data, seterror, setsuccess}) => {
         setsuccess(true)
     }
 }
+
+// ---------------------------------------------------------------------- Company ---------------------------------------------------------------
+export const createCompany = async ({id, data, seterror, setsuccess}) => {
+    const college = await supabase.from('company').insert([{
+        id: id,
+        name: data.name,
+        type: data.type,
+        head_office: data.head_office,
+        area_served: data.area_served,
+        industry: data.industry,
+        about: data.about, 
+        mobile: data.mobile,
+        email: data.email,
+        website: data.website,
+        street: data.street,
+        city: data.city,
+        pincode: data.pincode,
+        status: "Pending",
+    }])
+
+    if (college?.error) {
+        seterror(true)
+    } else {
+        setsuccess(true)
+    }
+}
+

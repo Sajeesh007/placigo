@@ -1,9 +1,9 @@
-import CollegeCard from '@/components/Cards/CollegeCard'
-import JobCard from '@/components/Cards/JobCard'
+import { useRouter } from 'next/router'
+
+import CollegeMessageCard from '@/components/Cards/College/CollegeMessageCard'
+import JobCard from '@/components/Cards/Company/JobCard'
 import ViewMore from '@/components/Text/ViewMore'
 import StudentLayout from '@/modules/Layout/StudentLayout'
-import { useRouter } from 'next/router'
-import React from 'react'
 
 export default function StudentHomePage() {
 
@@ -37,11 +37,7 @@ export default function StudentHomePage() {
                     <ViewMore onClick={()=>router.push('/student/college')}/>
                 </div>
                 <div className='flex overflow-x-auto space-x-6 no-scrollbar pb-4'>
-                    <CollegeCard/>
-                    <CollegeCard/>
-                    <CollegeCard/>
-                    <CollegeCard/>
-                    <CollegeCard/>
+                    <CollegeMessageCard/>
                 </div>
             </div>
 

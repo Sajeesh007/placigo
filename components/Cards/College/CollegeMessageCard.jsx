@@ -1,6 +1,6 @@
 
 
-export default function CollegeCard() {
+export default function CollegeMessageCard() {
   return (
     <div className='flex flex-col grdnt-teal h-30 w-96 rounded-3xl  py-4 px-6'>
 

@@ -8,8 +8,10 @@ module.exports = {
   theme: {
     extend: {
       spacing: {
+        '70': '17.5rem',
         '76': '19rem',
         '84' : '21rem',
+        '88' : '22rem',
       },
       fontFamily: {
         'roboto': ['Roboto'],
