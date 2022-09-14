@@ -4,12 +4,14 @@ import { useEffect, useState } from 'react'
 import { getCollegeNotifications } from '@/services/college.service'
 
 import CollegeLayout from '@/modules/Layout/CollegeLayout'
-import CollegeNotificationCard from '@/components/Cards/College/CollegeNotificationCard'
 import ViewMore from '@/components/Text/ViewMore'
 import Skelton from '@/components/Skelton/Skelton'
 import CollegeNotificationCardSmall from '@/components/Cards/College/CollegeNotificationCardSmall'
+import { useAuthContext } from 'store/Context'
 
 export default function CollegeHomePage() {
+
+    const { user } = useAuthContext()
 
     const router = useRouter()
 
@@ -18,8 +20,8 @@ export default function CollegeHomePage() {
     const [error, seterror] = useState(false)
   
     useEffect(() => {
-        getCollegeNotifications({setnotificationsData: setnotificationsData, seterror: seterror, setloading: setloading})
-    }, [])
+       user?.id && getCollegeNotifications({id: user?.id, setnotificationsData: setnotificationsData, seterror: seterror, setloading: setloading})
+    }, [user])
 
     const handleViewNotification = (id) => {
         router.push(`/college/notification/${id}`)
@@ -45,14 +47,6 @@ export default function CollegeHomePage() {
                 }
             </div>
 
-            {/* Current placements */}
-            <div className='flex flex-col space-y-2'>
-                <h5>Latest Placements</h5>
-                <div className='flex flex-col'>
-
-                </div>
-
-            </div>
             
         </div>
     )

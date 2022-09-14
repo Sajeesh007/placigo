@@ -8,8 +8,11 @@ import { MdOutlineAdd } from 'react-icons/md'
 import CollegeLayout from '@/modules/Layout/CollegeLayout'
 import Tabs from '@/components/Navigation/Tabs'
 import CollegeNotificationCard from '@/components/Cards/College/CollegeNotificationCard'
+import { useAuthContext } from 'store/Context'
 
 export default function CollegeNotifications() {
+
+  const { user } = useAuthContext()
 
   const router = useRouter()
 
@@ -18,8 +21,8 @@ export default function CollegeNotifications() {
   const [error, seterror] = useState(false)
 
   useEffect(() => {
-    getCollegeNotifications({id: user?.id, setnotificationsData: setnotificationsData, seterror: seterror, setloading: setloading})
-  }, [])
+    user?.id && getCollegeNotifications({id: user?.id, setnotificationsData: setnotificationsData, seterror: seterror, setloading: setloading})
+  }, [user])
 
   const hanldeRouting = (route) => {
     router.push(`/college/${route}`)
