@@ -64,16 +64,16 @@
 
     /* gradient */
     .grdnt-indigo {
-        @apply bg-gradient-to-tr from-indigo-800 via-indigo-600 to-indigo-400 shadow-md shadow-indigo-800;   
+        @apply bg-gradient-to-tl from-indigo-800 via-indigo-600 to-indigo-400 shadow-md shadow-indigo-700;   
     }
     .grdnt-teal {
-        @apply bg-gradient-to-tr from-teal-800 via-teal-600 to-teal-400 shadow-md shadow-teal-700;   
+        @apply bg-gradient-to-tl from-teal-800 via-teal-600 to-teal-400 shadow-md shadow-teal-700;   
     }
     .grdnt-orange {
-        @apply bg-gradient-to-tr from-orange-800 via-orange-600 to-orange-400 shadow-md shadow-orange-700;   
+        @apply bg-gradient-to-tl from-orange-800 via-orange-600 to-orange-400 shadow-md shadow-orange-700;   
     }
     .grdnt-rose {
-        @apply bg-gradient-to-tr from-rose-800 via-rose-600 to-rose-400 shadow-md shadow-rose-800;   
+        @apply bg-gradient-to-tl from-rose-800 via-rose-600 to-rose-400 shadow-md shadow-rose-800;   
     }
 }
 

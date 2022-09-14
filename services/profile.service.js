@@ -27,7 +27,6 @@ export const createStudent = async ({id, data, seterror, setsuccess}) => {
         city: data.city,
         district: data.district,
         pincode: data.pincode,
-        status: "Pending",
     }])
 
     if (student?.error) {
@@ -36,33 +35,21 @@ export const createStudent = async ({id, data, seterror, setsuccess}) => {
         setsuccess(true)
     }
 }
-export const getStudentProfile = async ({id, setprofileData, seterror, setloading}) => {
-    setloading(true)
-    const student = await supabase.from('student').select(`
-        *,
-        college(
-            name,
-            id
-        )
-    `).match({id: id})
-
-    if (student?.error) {
-        seterror(true)
-    } else{
-        const data = {...student?.data[0], college_name: student?.data[0].college?.name, college_id: student?.data[0].college?.id}
-        setprofileData(data)
-    }
-    setloading(false)
+export const getStudentProfile = async ({id, setprofileData, seterror}) => {
+    const company = await supabase.from('student').select().match({id: id})
+    if (company?.error) seterror(true)
+    else setprofileData(company?.data[0])
 }
-export const updateStudentProfile = async ({id, data, setsuccess, seterror, setloading}) => {
+export const updateStuddentProfile = async ({id, data, seterror, setloading}) => {
     setloading(true)
-    console.log(data);
-    const student = await supabase.from('student').update(data).match({ id: id })
-    if (student?.error) {
-        seterror(true)
-    } else {
-        const student_metadata = await supabase.auth.update({ data: data })
-        student_metadata?.error  ? seterror(true) : setsuccess(true)
+    if(typeof(data.image) == 'object') {
+        const image = await supabase.storage.from('student-profile').upload('profile/' + id.toString(), data.image[0], {upsert: true})
+        data.image = 'https://sxiqrathaylvbolaekjw.supabase.co/storage/v1/object/public/' + image?.data?.Key
+        await supabase.from('student').update(data).match({ id: id }) 
+        await supabase.auth.update({ data: data })
+    }else {
+        await supabase.from('student').update(data).match({ id: id }) 
+        await supabase.auth.update({ data: data })
     }
     setloading(false)
 }
@@ -73,17 +60,16 @@ export const createCollege = async ({id, data, seterror, setsuccess}) => {
         id: id,
         name: data.name,
         university: data.university,
-        courses: data.courses.replace(/\s+/g, '').replace(/\n+/g,'').split(','),
-        specializations: data.specializations.replace(/\s+/g, '').replace(/\n+/g,'').split(','),
-        about: data.about,
-        mobile: data.mobile,
+        // courses: data.courses.replace(/\s+/g, '').replace(/\n+/g,'').split(','),
+        // specializations: data.specializations.replace(/\s+/g, '').replace(/\n+/g,'').split(','),
+        // about: data.about,
+        // mobile: data.mobile,
         email: data.email,
-        website: data.website,
-        street: data.street,
+        // website: data.website,
+        // street: data.street,
         city: data.city,
-        district: data.district,
-        pincode: data.pincode,
-        status: "Pending",
+        // district: data.district,
+        // pincode: data.pincode,
     }])
 
     if (college?.error) {
@@ -91,31 +77,58 @@ export const createCollege = async ({id, data, seterror, setsuccess}) => {
     } else {
         setsuccess(true)
     }
+}
+export const getCollegeProfile = async ({id, setprofileData, seterror}) => {
+    const college = await supabase.from('college').select().match({id: id})
+    if (college?.error) seterror(true)
+    else setprofileData(college?.data[0])
+}
+export const updateCollegeProfile = async ({id, data, setloading}) => {
+    setloading(true)
+    if(typeof(data.image) == 'object') {
+        const image = await supabase.storage.from('college-profile').upload('profile/' + id.toString(), data.image[0], {upsert: true})
+        data.image = 'https://sxiqrathaylvbolaekjw.supabase.co/storage/v1/object/public/' + image?.data?.Key
+        await supabase.from('college').update(data).match({ id: id }) 
+        await supabase.auth.update({ data: data })
+    }else {
+        await supabase.from('college').update(data).match({ id: id }) 
+        await supabase.auth.update({ data: data })
+    }
+    setloading(false)
 }
 
 // ---------------------------------------------------------------------- Company ---------------------------------------------------------------
 export const createCompany = async ({id, data, seterror, setsuccess}) => {
-    const college = await supabase.from('company').insert([{
+    const company = await supabase.from('company').insert([{
         id: id,
         name: data.name,
-        type: data.type,
         head_office: data.head_office,
-        area_served: data.area_served,
-        industry: data.industry,
-        about: data.about, 
         mobile: data.mobile,
         email: data.email,
         website: data.website,
-        street: data.street,
-        city: data.city,
-        pincode: data.pincode,
-        status: "Pending",
     }])
 
-    if (college?.error) {
+    if (company?.error) {
         seterror(true)
     } else {
         setsuccess(true)
     }
 }
-
+export const getCompanyProfile = async ({id, setprofileData, seterror}) => {
+    const company = await supabase.from('company').select().match({id: id})
+    if (company?.error) seterror(true)
+    else setprofileData(company?.data[0])
+}
+export const updateCompanyProfile = async ({id, data, seterror, setloading}) => {
+    setloading(true)
+    if(typeof(data.image) == 'object') {
+        const image = await supabase.storage.from('company-profile').upload('profile/' + id.toString(), data.image[0], {upsert: true})
+        data.image = 'https://sxiqrathaylvbolaekjw.supabase.co/storage/v1/object/public/' + image?.data?.Key
+        await supabase.from('company').update(data).match({ id: id }) 
+        await supabase.auth.update({ data: data })
+    }else {
+        await supabase.from('company').update(data).match({ id: id }) 
+        await supabase.auth.update({ data: data })
+    }
+    setloading(false)
+}

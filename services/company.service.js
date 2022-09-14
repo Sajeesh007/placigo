@@ -1,47 +1,19 @@
 import { supabase } from "supabse";
 
-
-export const getCompanyById = ({id, setdata, seterror, setloading}) => {
-
-}
-
-// ----------------------------------------------------------------JOBS--------------------------------------------------------
-export const addJob = async ({data, setsuccess, seterror, setloading}) => {
+export const getCompanies = async ({setcompaniesData, seterror, setloading}) => {
     setloading(true)
-    const job = await supabase.from('jobs').insert([data])
-    if(job?.error)
+    const companies = await supabase.from('company').select()
+    if(companies?.error)
         seterror(true)
     else
-        setsuccess(job.data)
+        setcompaniesData(companies.data)
     setloading(false)
 }
-export const getJobs = async ({setjobsData, seterror, setloading}) => {
+export const getCompanyById = async ({id, setcompanyData, seterror, setloading}) => {
     setloading(true)
-    const jobs = await supabase.from('jobs').select(`*,company(*)`)
-    if(jobs?.error)
-        seterror(true)
-    else
-        setjobsData(jobs.data)
-    setloading(false)
-}
-export const getJobById = async ({id, setjobData, setglobalJobData, seterror, setloading}) => {
-    setloading(true)
-    const jobs = await supabase.from('jobs').select(`*,company(*)`).match({id: id})
-    if(jobs?.error)
-        seterror(true)
-    else{
-        setjobData && setjobData(jobs.data[0])
-        setglobalJobData && setglobalJobData(jobs.data[0])
-    }
+    const company = await supabase.from('company').select().match({id: id})
+    if(company?.error) seterror(true)
+    else setcompanyData(company.data[0])
     setloading(false)
 }
 
-export const getJobAppliedStudents = async ({id, setstudentData, seterror, setloading}) => {
-    setloading(true)
-    const students = await supabase.from('student').select(`*,college(*)`).in('id',id)
-    if(students?.error)
-        seterror(true)
-    else
-        setstudentData(students.data)
-    setloading(false)
-}

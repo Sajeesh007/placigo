@@ -19,9 +19,6 @@ export default function Header() {
     // Prefetch the dashboard page
     router.prefetch(`/${user?.user_metadata?.role}/notifications`)
     router.prefetch(`/${user?.user_metadata?.role}/profile`)
-    if (user?.user_metadata?.role == 'company' || user?.user_metadata?.role == 'students') {
-      router.prefetch(`/${user?.user_metadata?.role}/chats`)
-    }
   }, [router.isReady])
 
   return (
@@ -29,9 +26,6 @@ export default function Header() {
       h-16 px-4 sticky top-0 z-50 '>
           <h5>placigo</h5>
           <div className="flex items-center space-x-5">
-            { (user?.user_metadata?.role == 'company' || user?.user_metadata?.role == 'student') && 
-              <IconItem icon={<BiMessageSquareDetail className={`w-7 h-7 text-white`}/>} handleRouting={()=>router.push(`/${user?.user_metadata?.role}/chats`)}/>
-            }
             <IconItem icon={<MdOutlineNotifications className={`w-7 h-7 text-white`}/>} handleRouting={()=>router.push(`/${user?.user_metadata?.role}/notifications`)}/>
             <IconItem icon={<RiAccountCircleLine className={`w-7 h-7 text-white`}/>} handleRouting={()=>router.push(`/${user?.user_metadata?.role}/profile`)}/>
           </div>

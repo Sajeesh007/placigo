@@ -1,11 +1,19 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 
-import Spaces from '@/components/Posts/Spaces'
+import Spaces from '@/components/Cards/Space/Spaces'
 import StudentCardSmall from '@/components/Cards/Student/StudentCardSmall'
+import CollegeAbout from '@/components/List/CollegeAbout'
 
-export default function CollegeProfileTabs({studentsData, about}) {
+export default function CollegeProfileTabs({studentsData, collegeData, spaceData}) {
+
+    const router = useRouter()
 
     const [active, setactive] = useState('spaces')
+
+    const handleRouting = (id) => {
+        router.push(`${router.asPath}/student/${id}`)
+    }
 
     return (
         <div className='flex flex-col'>
@@ -34,26 +42,23 @@ export default function CollegeProfileTabs({studentsData, about}) {
                 {   
                     active == 'spaces' ?
                         <div className='flex flex-col space-y-1 divide-y divide-zinc-500 w-full pt-3'>
-                            {
-                                [1,2,3,5,7,8,9,6].map((item)=>
-                                <Spaces key={item} name='GECW' content='ssssssssss' time='2022-04-05'/> )
-                            } 
+                        {
+                            spaceData?.map((item)=>
+                                <Spaces data={item} key={item?.id} /> )
+                        } 
                         </div> :
 
                     active == 'students' ? 
                         <div className='grid grid-cols-2 pt-3 gap-2 place-items-center w-full'>
                             {
                                 studentsData?.map((student)=>
-                                    <StudentCardSmall name={student.name} studentId={student.id}/> )
+                                    <StudentCardSmall name={student.name} course={student.course} studentId={student.id}
+                                        handleRouting={handleRouting}/> )
                             }
                         </div> :
 
                     active == 'about' &&
-                        <div className='flex flex-col px-4 space-y-1 pt-3  '>
-                            <p className='break-all text-base'>{`
-                                ${about}
-                            `}</p>
-                        </div>
+                        <CollegeAbout data={collegeData} />
                 }
             </div>
 

@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 import { useForm } from 'react-hook-form'
 import dayjs from 'dayjs'
 
-import { addJob } from 'services/company.service'
+import { addJob } from 'services/job.service'
 import { useAuthContext } from 'store/Context'
 import { jobTypes } from '@/constants/form.const'
 
@@ -12,6 +12,7 @@ import InputText from '@/modules/Form/InputText'
 import Select from '@/modules/Form/Select'
 import TextArea from '@/modules/Form/TextArea'
 import InputDate from '@/modules/Form/InputDate'
+import CompanyLayout from '@/modules/Layout/CompanyLayout'
 
 
 export default function AddNewJobPage() {

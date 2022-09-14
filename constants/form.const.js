@@ -16,3 +16,4 @@ export const industries = [
 export const companyTypes = ['Private', 'Public', 'Government']
 
 export const jobTypes = ['Internship','Job/Full Time', 'Job/Part Time']
+

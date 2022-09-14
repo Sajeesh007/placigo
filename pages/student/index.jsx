@@ -1,32 +1,41 @@
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
-import CollegeMessageCard from '@/components/Cards/College/CollegeMessageCard'
-import JobCard from '@/components/Cards/Company/JobCard'
-import ViewMore from '@/components/Text/ViewMore'
+import { getJobs } from '@/services/job.service'
+import { getCollegeNotifications } from '@/services/college.service'
+import { useAuthContext } from '@/store/Context'
+
 import StudentLayout from '@/modules/Layout/StudentLayout'
-import { useEffect, useState } from 'react'
-import { getJobs } from 'services/company.service'
+import JobCard from '@/components/Cards/Job/JobCard'
+import ViewMore from '@/components/Text/ViewMore'
+import CollegeNotificationCardSmall from '@/components/Cards/College/CollegeNotificationCardSmall'
+import Skelton from '@/components/Skelton/Skelton'
 
 export default function StudentHomePage() {
+
+    const { user } = useAuthContext()
 
     const router = useRouter()
 
     const [jobsData, setjobsData] = useState(null)
     const [loading, setloading] = useState(false)
     const [error, seterror] = useState(false)
+    const [notificationsData, setnotificationsData] = useState(null)
   
     useEffect(() => {
-      getJobs({setjobsData: setjobsData, seterror: seterror, setloading: setloading})
+        getCollegeNotifications({id: user?.user_metadata?.college,setnotificationsData: setnotificationsData, seterror: seterror, setloading: setloading})
+        getJobs({setjobsData: setjobsData, seterror: seterror, setloading: setloading})
     }, [])
-
+    
+    const handleViewNotification = (id) => {
+        router.push(`/student/college/${id}`)
+    }
     const handleApplyJob = (jobId, companyId) => {
         router.push(`/student/company/${companyId}/job/${jobId}`)
     }
 
     return (
         <div className='page-top'>
-
-            {/* Small Dashboard */}
 
 
             {/* Suggested jobs */}
@@ -37,7 +46,7 @@ export default function StudentHomePage() {
                 </div>
                 <div className='flex overflow-x-auto no-scrollbar space-x-6 pb-4'>
                 { loading ?
-                    <div className='w-full bg-zinc-700 animate-pulse h-48 rounded-3xl'/> :
+                    <Skelton height='h-60' size={[1]}/> :
                     <div className='flex overflow-x-auto no-scrollbar space-x-6 pb-4'>
                         { jobsData?.map((job)=> 
                             <JobCard key={job.id} data={job} handleApply={handleApplyJob} />
@@ -53,18 +62,14 @@ export default function StudentHomePage() {
                     <h5>From College</h5>
                     <ViewMore onClick={()=>router.push('/student/college')}/>
                 </div>
-                <div className='flex overflow-x-auto space-x-6 no-scrollbar pb-4'>
-                    <CollegeMessageCard/>
-                </div>
-            </div>
-
-            {/* Current placements */}
-            <div className='flex flex-col space-y-2'>
-                <h5>Latest Placements</h5>
-                <div className='flex flex-col'>
-
-                </div>
-
+                { loading ?
+                    <Skelton height='h-60' size={[1]}/> :
+                    <div className='flex overflow-x-auto no-scrollbar space-x-6 pb-4'>
+                        { notificationsData?.map((item)=> 
+                            <CollegeNotificationCardSmall key={item?.id} data={item} handleViewNotification={handleViewNotification}/>
+                        )}
+                    </div>
+                }
             </div>
             
         </div>

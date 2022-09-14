@@ -42,3 +42,8 @@ export async function signIn({email, password, setsuccess, seterror, setloading,
     }
     setloading(false)
 }
+
+export async function logout({router}){
+    const {error} = await supabase.auth.signOut()
+    !error && router.push(`/login`)
+}

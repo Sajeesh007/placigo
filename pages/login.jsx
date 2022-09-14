@@ -43,9 +43,9 @@ export default function Login() {
                     <form className='flex flex-col space-y-4 items-center' onSubmit={handleSubmit(onSubmit)}>
                         <InputText type='email' htmlFor='email' label='Email' register={register} error={errors['email']}/>
                         <InputText type='password' htmlFor='password' label='Password' register={register} error={errors['password']}/>
-                        <Link href='/reset-password'>
+                        {/* <Link href='/reset-password'>
                             <p className=" text-right px-2 text-white">Forgot Password?</p>
-                        </Link>
+                        </Link> */}
                         {error && <p className='text-rose-600'>Invalid email address or email and password does not match</p> }
                         <button className='sbmt' type='submit'>
                             {loading ? 'Loading...': 'Login'}

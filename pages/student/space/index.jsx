@@ -1,44 +1,43 @@
 import { useEffect, useState } from "react"
 
-import { getStudentPosts } from "services/student.service"
+import { getAllSpaces } from "@/services/space.service"
 
+import Spaces from "@/components/Cards/Space/Spaces"
 import PostAdd from "@/components/Posts/PostAdd"
+import Skelton from "@/components/Skelton/Skelton"
 import StudentLayout from "@/modules/Layout/StudentLayout"
-import Spaces from "@/components/Posts/Spaces"
 
-export default function StudentSpacePage() {
+export default function SpaceStudentPage() {
 
-  const [studentPosts, setstudentPosts] = useState(null)
-  const [collegePosts, setcollegePosts] = useState(null)
-  const [companyPosts, setcompanyPosts] = useState(null)
-  const [error, seterror] = useState(false)
-  const [loading, setloading] = useState(false)
+    const [spacesData, setspacesData] = useState(null)
+    const [loading, setloading] = useState(false)
+    const [error, seterror] = useState(false)
 
-  
-  useEffect(() => {
-    getStudentPosts({setstudentPosts: setstudentPosts, seterror: seterror, setloading: setloading})
-  }, [])
-  
+    useEffect(() => {
+        getAllSpaces({setspacesData: setspacesData, seterror: seterror, setloading: setloading})
+    }, [])
 
-  return (
-    <div className="page-top">
 
-      {/* latest 5 posts */}
-      <div className="flex flex-col divide-y divide-zinc-700">
-        { 
-          studentPosts?.map((post)=> 
-            <Spaces key={post.id} name={post.student.name} content={post.content} time={post.created_at}/>
-          )         
-        }
-
-      </div>
-
-    </div>
-  )
+    return (
+        <div className='page-top'>
+            <div className='flex flex-col justify-center '>
+                <h5>Space</h5>
+                <p className="text-zinc-400">See What Others Doing</p>
+            </div>
+            { loading ?
+                <Skelton height='h-28' size={[1,2,3,4,5]}/> :
+                <div className='flex flex-col space-y-4 pb-4'>
+                    { spacesData?.map((space)=> 
+                        <Spaces key={space?.created_at} data={space}/>
+                    )}
+                </div>
+            }
+            
+        </div>
+    )
 }
 
-
-StudentSpacePage.getLayout = function getLayout(page) {
+SpaceStudentPage.getLayout = function getLayout(page) {
     return (
       <StudentLayout>
         <PostAdd/>

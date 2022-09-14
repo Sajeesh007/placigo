@@ -1,37 +1,56 @@
-import CompanyCard from "@/components/Cards/Company/CompanyCard"
-import MainCard from "@/components/Cards/MainCard"
-import StudentLayout from "@/modules/Layout/StudentLayout"
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+
+import { getJobs } from '@/services/job.service'
+
+import ViewMore from '@/components/Text/ViewMore'
+import StudentLayout from '@/modules/Layout/StudentLayout'
+import JobCardForStudentAndCollege from '@/components/Cards/Job/JobCardForStudentAndCollege'
+import CompanyCardForStudentAndCollegeSmall from '@/components/Cards/Company/CompanyCardForStudentAndCollegeSmall'
 
 export default function StudentJobsPage() {
-  return (
-    <div className="page-top">
 
-        <div className="flex flex-col space-y-1">
-            <h5 className="pl-4 pt-4">Popular Companies</h5>
-            <div className="flex overflow-x-auto w-screen pt-2 pb-4">
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-                <CompanyCard/>
-            </div>
-        </div>
+    const router = useRouter()
 
-        <div className="flex flex-col space-y-1">
-            <h5 className="pl-4 py-2">Suggested Jobs</h5>
-            <div className="flex flex-col space-y-6">
-                <MainCard />
-                <MainCard />
-                <MainCard />
-                <MainCard />
-                <MainCard />
-                <MainCard />
+    const [jobsData, setjobsData] = useState(null)
+    const [loading, setloading] = useState(false)
+    const [error, seterror] = useState(false)
+  
+    useEffect(() => {
+      getJobs({setjobsData: setjobsData, seterror: seterror, setloading: setloading})
+    }, [])
+
+    const handleViewCompany = (companyId) => {
+        router.push(`/student/company/${companyId}`)
+    }
+
+    const handleApplyJob = (companyId, jobId) => {
+      router.push(`/student/company/${companyId}/job/${jobId}`)
+  }
+
+    return (
+        <div className='page-top'>
+
+            {/* Jobs */}
+            <div className='flex flex-col space-y-2'>
+                <div className='flex justify-between items-center'>
+                    <h5>Jobs</h5>
+                </div>
+                { loading ?
+                    <div className='flex flex-col space-y-4'>
+                        {[1,2,3,4].map((item)=> <div key={item} className='w-full bg-zinc-700 animate-pulse h-40 rounded-3xl'/>)} 
+                    </div> :
+                    <div className='flex flex-col space-y-6'>
+                        { jobsData?.map((job)=> 
+                            <JobCardForStudentAndCollege key={job.id} data={job} handleApplyJob={handleApplyJob} />
+                        )}
+                    </div>
+                }
             </div>
+            
         </div>
-    </div>
-  )
+    )
 }
-
 
 StudentJobsPage.getLayout = function getLayout(page) {
     return (
