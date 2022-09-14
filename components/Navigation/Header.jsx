@@ -26,7 +26,6 @@ export default function Header() {
       h-16 px-4 sticky top-0 z-50 '>
           <h5>placigo</h5>
           <div className="flex items-center space-x-5">
-            <IconItem icon={<MdOutlineNotifications className={`w-7 h-7 text-white`}/>} handleRouting={()=>router.push(`/${user?.user_metadata?.role}/notifications`)}/>
             <IconItem icon={<RiAccountCircleLine className={`w-7 h-7 text-white`}/>} handleRouting={()=>router.push(`/${user?.user_metadata?.role}/profile`)}/>
           </div>
     </div>
