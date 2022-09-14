@@ -6,6 +6,15 @@ module.exports =withPWA({
   pwa: {
     dest: 'public',
     register: true,
-    disable: true
-  }
+    disable: false
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/login',
+        permanent: true,
+      },
+    ]
+  },
 })
